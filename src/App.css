@@ -1,0 +1,54 @@
+/* משתנים (חייבים אותם כדי שהצבעים בהדר יעבדו) */
+:root {
+  --primary-gradient-start: #667eea;
+  --primary-gradient-end: #764ba2;
+}
+
+/* =========================================
+   1. עיצוב Navbar (התפריט העליון)
+   ========================================= */
+
+/* הפס עצמו (הרקע הסגול/גרדיאנט) */
+.navbar {
+  background: linear-gradient(90deg, var(--primary-gradient-start) 0%, var(--primary-gradient-end) 100%);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  padding: 0.5rem 0;
+}
+
+/* עיצוב הקישורים (הטקסטים: "קטלוג סדנאות", "הוספת סדנה") */
+.navbar-item, .navbar-link {
+  color: rgba(255, 255, 255, 0.9) !important;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  margin: 0 5px;
+  background-color: transparent !important;
+}
+
+/* כשעוברים עם העכבר על קישור (אפקט זכוכית) */
+a.navbar-item:hover, a.navbar-link:hover {
+  background-color: rgba(255, 255, 255, 0.2) !important;
+  color: #ffffff !important;
+  border-radius: 12px;
+  backdrop-filter: blur(5px);
+  transform: translateY(-2px);
+}
+
+/* הקישור הפעיל או כשלוחצים (טקסט צהוב) */
+a.navbar-item:focus, a.navbar-item:focus-within, a.navbar-item.is-active {
+  background-color: transparent !important;
+  color: #ffeaa7 !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
+
+/* האזור של הלוגו */
+.navbar-brand .navbar-item {
+  background-color: transparent !important;
+  box-shadow: none !important;
+  transform: none !important;
+  padding: 0 15px;
+}
+
+.navbar-brand .navbar-item:hover {
+  opacity: 0.9;
+}
