@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
-// import HomePage from './pages/HomePage';  <-- שמתי בהערה זמנית
+import HomePage from './pages/HomePage'; 
 // import FormPage from './pages/FormPage';  <-- שמתי בהערה זמנית
 // import WorkshopDetailsPage from './pages/WorkshopDetailsPage'; <-- שמתי בהערה זמנית
 
@@ -35,7 +35,7 @@ function App() {
       {/* --- תוכן זמני לבדיקה --- */}
       <div className="container mt-5">
         <Routes>
-          <Route path="/" element={<h1> זה דף הבית (העיצוב עובד?)</h1>} />
+          <Route path="/" element={<HomePage />} />
           <Route path="/add-workshop" element={<h1>כאן יהיה הטופס</h1>} />
           <Route path="/workshop/:id" element={<h1>כאן יהיו פרטים</h1>} />
         </Routes>

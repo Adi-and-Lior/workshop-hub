@@ -52,3 +52,130 @@ a.navbar-item:focus, a.navbar-item:focus-within, a.navbar-item.is-active {
 .navbar-brand .navbar-item:hover {
   opacity: 0.9;
 }
+
+/* =========================================
+   2. עיצוב Hero Section (הבאנר העליון עם התמונה)
+   ========================================= */
+.hero-section {
+  background: 
+    url('/hero_bg.png'); /* ודאי שיש לך תמונה בשם הזה ב-public */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding: 6rem 1.5rem 8rem 1.5rem; 
+  margin-bottom: 0;
+  border-radius: 0 0 50px 50px; 
+  color: white;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-section .title {
+  color: #ffffff !important;
+  font-weight: 800;
+  letter-spacing: -1px;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); 
+}
+
+.hero-section .subtitle {
+  color: rgba(255, 255, 255, 0.95) !important;
+  font-weight: 500;
+  font-size: 1.5rem;
+  max-width: 600px;
+  margin: 0 auto;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* =========================================
+   3. עיצוב תיבת החיפוש הצפה
+   ========================================= */
+.search-container {
+  position: relative;
+  background: white;
+  padding: 2rem;
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(0,0,0,0.02);
+  z-index: 10;
+  /* הרמנו אותה מעל הבאנר */
+  margin-top: -60px; 
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.search-input {
+  background-color: #f4f6f8;
+  border: 1px solid transparent !important;
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+.search-input:focus {
+  background-color: white;
+  border-color: var(--primary-color) !important;
+  box-shadow: 0 0 0 4px rgba(108, 92, 231, 0.15) !important;
+}
+
+/* =========================================
+   4. עיצוב כרטיסיות (Workshop Cards)
+   ========================================= */
+.card {
+  border-radius: 16px;
+  border: none;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  height: 100%;
+  background: white;
+  overflow: hidden;
+}
+
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 30px rgba(108, 92, 231, 0.2);
+}
+
+.card-image img {
+  border-radius: 16px 16px 0 0;
+  height: 200px;
+  width: 100%;
+  object-fit: cover;
+}
+
+.card-content {
+  padding: 1.5rem;
+}
+
+/* =========================================
+   6. אלמנטים כלליים (כפתורים ותגיות שיופיעו בכרטיסיות)
+   ========================================= */
+
+/* כפתור גרדיאנט */
+.gradient-button {
+  background: linear-gradient(90deg, var(--primary-gradient-start) 0%, var(--primary-gradient-end) 100%);
+  color: white !important;
+  border: none;
+  font-weight: 600;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(118, 75, 162, 0.3);
+}
+
+.gradient-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(118, 75, 162, 0.5);
+  opacity: 0.95;
+}
+
+/* תגיות צבעוניות */
+.tag {
+  border-radius: 6px;
+  font-weight: 500;
+}
+.tag.is-lilac {
+  background-color: #f3e8ff !important;
+  color: #6b21a8 !important;
+  border: 1px solid #d8b4fe !important;
+  font-weight: 700;
+}
