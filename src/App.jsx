@@ -1,15 +1,21 @@
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
-import HomePage from './pages/HomePage'; 
-// import FormPage from './pages/FormPage';  <-- שמתי בהערה זמנית
-// import WorkshopDetailsPage from './pages/WorkshopDetailsPage'; <-- שמתי בהערה זמנית
+import HomePage from './pages/HomePage';
+// import FormPage from './pages/FormPage'; // נחזיר רק שהקובץ יהיה מוכן
+import WorkshopDetailsPage from './pages/WorkshopDetailsPage';
 
 function App() {
   return (
-    <BrowserRouter>
-      {/* --- התחלת ה-Navbar --- */}
+    <BrowserRouter
+      // דגלים לביטול אזהרות עתידיות של React Router v7
+      future={{
+        v7_startTransition: true,
+        v7_relativeSplatPath: true,
+      }}
+    >
       <nav className="navbar" role="navigation" aria-label="main navigation">
         <div className="navbar-brand">
           <Link to="/" className="navbar-item">
+            {/* הלוגו המקומי מתיקיית public */}
             <img 
               src="/logo.png" 
               alt="WorkShop Hub" 
@@ -24,20 +30,26 @@ function App() {
           </a>
         </div>
 
-        <div className="navbar-menu is-active">
+        <div className="navbar-menu">
           <div className="navbar-start">
             <Link to="/" className="navbar-item">קטלוג סדנאות</Link>
+            
+            {/* קישור לדף הוספת
             <Link to="/add-workshop" className="navbar-item">הוספת סדנה</Link>
+            */}
           </div>
         </div>
       </nav>
 
-      {/* --- תוכן זמני לבדיקה --- */}
       <div className="container mt-5">
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/add-workshop" element={<h1>כאן יהיה הטופס</h1>} />
-          <Route path="/workshop/:id" element={<h1>כאן יהיו פרטים</h1>} />
+          
+          {/* הראוטר לדף הוספה
+          <Route path="/add-workshop" element={<FormPage />} />
+          */}
+          
+          <Route path="/workshop/:id" element={<WorkshopDetailsPage />} />
         </Routes>
       </div>
     </BrowserRouter>
