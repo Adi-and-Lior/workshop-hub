@@ -1,21 +1,38 @@
-/* משתנים (חייבים אותם כדי שהצבעים בהדר יעבדו) */
+/* --- ייבוא פונט Rubik מגוגל --- */
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700;800&display=swap');
+
 :root {
+  --primary-color: #6c5ce7;
   --primary-gradient-start: #667eea;
   --primary-gradient-end: #764ba2;
+  --bg-color: #f8f9fa;
+  --text-dark: #2d3436;
+}
+
+body {
+  font-family: 'Rubik', sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-dark);
+  direction: rtl;
+  min-height: 100vh;
+  margin: 0;
 }
 
 /* =========================================
    1. עיצוב Navbar (התפריט העליון)
    ========================================= */
-
-/* הפס עצמו (הרקע הסגול/גרדיאנט) */
 .navbar {
   background: linear-gradient(90deg, var(--primary-gradient-start) 0%, var(--primary-gradient-end) 100%);
   box-shadow: 0 4px 15px rgba(0,0,0,0.1);
   padding: 0.5rem 0;
+  
+  /* --- תוספת Sticky Header --- */
+  position: sticky;
+  top: 0;
+  z-index: 1000; /* מוודא שהתפריט יהיה מעל הכל */
 }
 
-/* עיצוב הקישורים (הטקסטים: "קטלוג סדנאות", "הוספת סדנה") */
+/* ברירת מחדל: טקסט לבן לכל הקישורים */
 .navbar-item, .navbar-link {
   color: rgba(255, 255, 255, 0.9) !important;
   font-weight: 500;
@@ -24,7 +41,7 @@
   background-color: transparent !important;
 }
 
-/* כשעוברים עם העכבר על קישור (אפקט זכוכית) */
+/* מצב 1: כשעוברים עם העכבר (Hover) - זכוכית */
 a.navbar-item:hover, a.navbar-link:hover {
   background-color: rgba(255, 255, 255, 0.2) !important;
   color: #ffffff !important;
@@ -33,35 +50,37 @@ a.navbar-item:hover, a.navbar-link:hover {
   transform: translateY(-2px);
 }
 
-/* הקישור הפעיל או כשלוחצים (טקסט צהוב) */
+/* מצב 2: כשלוחצים (Focus/Active) - טקסט צהוב */
 a.navbar-item:focus, a.navbar-item:focus-within, a.navbar-item.is-active {
   background-color: transparent !important;
-  color: #ffeaa7 !important;
+  color: #ffeaa7 !important; /* צהוב בננה */
   box-shadow: none !important;
   transform: none !important;
 }
 
-/* האזור של הלוגו */
+/* עיצוב הלוגו */
 .navbar-brand .navbar-item {
   background-color: transparent !important;
   box-shadow: none !important;
   transform: none !important;
   padding: 0 15px;
 }
-
 .navbar-brand .navbar-item:hover {
   opacity: 0.9;
 }
 
 /* =========================================
-   2. עיצוב Hero Section (הבאנר העליון עם התמונה)
+   2. עיצוב Hero Section (הבאנר העליון)
    ========================================= */
 .hero-section {
+  /* כאן הקסם: אנחנו שמים שכבה סגולה שקופה מעל התמונה */
   background: 
-    url('/hero_bg.png'); /* ודאי שיש לך תמונה בשם הזה ב-public */
-  background-size: cover;
-  background-position: center;
+    url('/hero_bg.png'); /* הנתיב לתמונה ששמרת ב-public */
+    
+  background-size: cover;      /* התמונה תכסה את כל השטח */
+  background-position: center; /* התמונה תהיה ממורכזת */
   background-repeat: no-repeat;
+  
   padding: 6rem 1.5rem 8rem 1.5rem; 
   margin-bottom: 0;
   border-radius: 0 0 50px 50px; 
@@ -88,7 +107,7 @@ a.navbar-item:focus, a.navbar-item:focus-within, a.navbar-item.is-active {
 }
 
 /* =========================================
-   3. עיצוב תיבת החיפוש הצפה
+   3. עיצוב תיבת החיפוש הצפה (Home Page)
    ========================================= */
 .search-container {
   position: relative;
@@ -98,11 +117,6 @@ a.navbar-item:focus, a.navbar-item:focus-within, a.navbar-item.is-active {
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
   border: 1px solid rgba(0,0,0,0.02);
   z-index: 10;
-  /* הרמנו אותה מעל הבאנר */
-  margin-top: -60px; 
-  max-width: 800px;
-  margin-left: auto;
-  margin-right: auto;
 }
 
 .search-input {
@@ -116,6 +130,12 @@ a.navbar-item:focus, a.navbar-item:focus-within, a.navbar-item.is-active {
   background-color: white;
   border-color: var(--primary-color) !important;
   box-shadow: 0 0 0 4px rgba(108, 92, 231, 0.15) !important;
+}
+
+.control.has-icons-right .icon {
+  height: 100%;
+  pointer-events: none;
+  opacity: 0.6;
 }
 
 /* =========================================
@@ -148,10 +168,34 @@ a.navbar-item:focus, a.navbar-item:focus-within, a.navbar-item.is-active {
 }
 
 /* =========================================
-   6. אלמנטים כלליים (כפתורים ותגיות שיופיעו בכרטיסיות)
+   5. עיצוב טופס סגלגל (Form Page)
+   ========================================= */
+.purple-form-box {
+  background: linear-gradient(180deg, #ffffff 0%, #f4f1ff 100%);
+  border: 1px solid rgba(108, 92, 231, 0.1);
+  box-shadow: 0 20px 50px rgba(118, 75, 162, 0.08);
+}
+
+.purple-form-box .input, 
+.purple-form-box .textarea, 
+.purple-form-box .select select {
+  background-color: #ffffff;
+  border-color: #e6e6fa;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+}
+
+.purple-form-box .input:focus, 
+.purple-form-box .textarea:focus, 
+.purple-form-box .select select:focus {
+  border-color: #6c5ce7;
+  box-shadow: 0 0 0 4px rgba(108, 92, 231, 0.15);
+}
+
+/* =========================================
+   6. אלמנטים כלליים (כפתורים, תגיות)
    ========================================= */
 
-/* כפתור גרדיאנט */
+/* כפתור גרדיאנט מיוחד (לפרסום סדנה) */
 .gradient-button {
   background: linear-gradient(90deg, var(--primary-gradient-start) 0%, var(--primary-gradient-end) 100%);
   color: white !important;
@@ -168,14 +212,106 @@ a.navbar-item:focus, a.navbar-item:focus-within, a.navbar-item.is-active {
   opacity: 0.95;
 }
 
-/* תגיות צבעוניות */
+.gradient-button:active {
+  transform: translateY(1px);
+  box-shadow: none;
+}
+
+/* כפתורים רגילים (דריסת Bulma) */
+.button.is-primary {
+  background-color: var(--primary-color) !important;
+  border-radius: 8px;
+}
+.button.is-primary:hover {
+  background-color: #5649c0 !important;
+}
+
+/* תגיות */
 .tag {
   border-radius: 6px;
   font-weight: 500;
 }
 .tag.is-lilac {
-  background-color: #f3e8ff !important;
-  color: #6b21a8 !important;
-  border: 1px solid #d8b4fe !important;
+  background-color: #f3e8ff !important; /* רקע לילך בהיר */
+  color: #6b21a8 !important;           /* טקסט סגול עמוק */
+  border: 1px solid #d8b4fe !important; /* מסגרת עדינה */
   font-weight: 700;
+}
+
+/* =========================================
+   7. עיצוב Footer (סגנון לילך מיוחד)
+   ========================================= */
+.footer-custom {
+  /* רקע כהה אלגנטי */
+  background-color:#574c91 ;
+  color: #dcdde1;
+  padding: 3rem 1.5rem;
+  margin-top: auto;
+  
+  /* פס עליון בצבע לילך זוהר */
+  box-shadow: 0 -10px 30px rgba(0,0,0,0.1);
+}
+
+/* כותרות בפוטר */
+.footer-custom .title {
+  color: #ffffff !important;
+  text-shadow: 0 2px 10px rgba(156, 136, 255, 0.3); /* צל סגלגל */
+}
+
+/* קישורים באמצע */
+.footer-links a {
+  color: #ffffff; /* צבע לילך בהיר */
+  margin: 0 12px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.footer-links a:hover {
+  color: #fff;
+  text-shadow: 0 0 10px rgba(162, 155, 254, 0.8); /* אפקט זוהר במעבר */
+  transform: translateY(-2px);
+  display: inline-block;
+}
+
+/* כיתוב זכויות יוצרים */
+.footer-custom .subtitle {
+  color: #b2bec3 !important;
+  font-size: 0.85rem;
+}
+
+/* --- אייקונים של רשתות חברתיות --- */
+.social-icons {
+  display: flex;
+  gap: 12px;
+  justify-content: center; /* מירכוז למובייל */
+}
+
+/* עיגול האייקון */
+.icon-link {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%; /* עיגול מושלם */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* קפיצה קטנה */
+  border: 1px solid rgba(162, 155, 254, 0.1);
+}
+
+/* אפקט במעבר עכבר על האייקון */
+.icon-link:hover {
+  background-color: #9c88ff; /* הרקע הופך לסגול לילך */
+  box-shadow: 0 0 15px rgba(156, 136, 255, 0.6); /* הילה סגולה */
+  transform: scale(1.1) rotate(5deg);
+  border-color: transparent;
+}
+
+/* התאמה למסכים גדולים - אייקונים בצד שמאל */
+@media screen and (min-width: 769px) {
+  .social-icons {
+    justify-content: flex-end;
+  }
 }
