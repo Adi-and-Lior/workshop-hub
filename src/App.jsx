@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import HomePage from './pages/HomePage';
-// import FormPage from './pages/FormPage'; // נחזיר כשיהיה מוכן
+import FormPage from './pages/FormPage';
 import WorkshopDetailsPage from './pages/WorkshopDetailsPage';
 import Footer from './components/Footer';
 
@@ -39,9 +39,9 @@ function App() {
             <div className="navbar-start">
               <Link to="/" className="navbar-item">קטלוג סדנאות</Link>
               
-              {/* קישור עתידי להוספת סדנה - כרגע בהערה
+              {
               <Link to="/add-workshop" className="navbar-item">הוספת סדנה</Link>
-              */}
+              }
             </div>
           </div>
         </nav>
@@ -51,9 +51,9 @@ function App() {
           <Routes>
             <Route path="/" element={<HomePage />} />
             
-            {/* ראוטר עתידי להוספה - כרגע בהערה
+            {
             <Route path="/add-workshop" element={<FormPage />} />
-            */}
+            }
             
             <Route path="/workshop/:id" element={<WorkshopDetailsPage />} />
           </Routes>

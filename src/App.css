@@ -15,7 +15,6 @@ body {
   color: var(--text-dark);
   direction: rtl;
   min-height: 100vh;
-  margin: 0;
 }
 
 /* =========================================
@@ -25,11 +24,6 @@ body {
   background: linear-gradient(90deg, var(--primary-gradient-start) 0%, var(--primary-gradient-end) 100%);
   box-shadow: 0 4px 15px rgba(0,0,0,0.1);
   padding: 0.5rem 0;
-  
-  /* --- תוספת Sticky Header --- */
-  position: sticky;
-  top: 0;
-  z-index: 1000; /* מוודא שהתפריט יהיה מעל הכל */
 }
 
 /* ברירת מחדל: טקסט לבן לכל הקישורים */
