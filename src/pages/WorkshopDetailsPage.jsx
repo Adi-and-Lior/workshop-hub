@@ -4,12 +4,9 @@ import { getWorkshopById } from '../services/workshopService';
 
 export default function WorkshopDetailsPage() {
   const { id } = useParams();
-  
   const [workshop, setWorkshop] = useState(null);
   const [loading, setLoading] = useState(true);
   const [mentors, setMentors] = useState([]);
-
-  // --- Dictionaries ---
   const getCategoryHebrew = (catEn) => {
     const dictionary = {
       'arts': 'אומנות', 'tech': 'טכנולוגיה', 'cooking': 'בישול',
@@ -25,11 +22,10 @@ export default function WorkshopDetailsPage() {
     return 'למתחילים';
   };
 
-  // Adjusted colors (purple/white/light purple) instead of green/red
   const getDifficultyColor = (level) => {
-    if (level === 'advanced') return 'is-primary'; // Purple
-    if (level === 'intermediate') return 'is-link is-light'; // Light purple
-    return 'is-white'; // White
+    if (level === 'advanced') return 'is-primary'; 
+    if (level === 'intermediate') return 'is-link is-light'; 
+    return 'is-white';
   };
 
   useEffect(() => {
@@ -54,7 +50,6 @@ export default function WorkshopDetailsPage() {
 
   return (
     <div>
-      {/* --- Top Banner (Hero) --- */}
       <div 
         className="hero-background" 
         style={{
@@ -76,19 +71,14 @@ export default function WorkshopDetailsPage() {
         
         <div className="container" style={{ position: 'relative', zIndex: 1, paddingTop: '3rem' }}>
             <Link to="/" className="button is-white is-outlined is-rounded mb-4" style={{borderWidth: '2px', fontWeight: 'bold'}}>
-                ← חזרה לקטלוג
+                → חזרה לקטלוג
             </Link>
         </div>
       </div>
-
-      {/* --- Info Card --- */}
       <div className="section">
         <div className="container" style={{ maxWidth: '1000px' }}>
-          
           <div className="box purple-form-box" style={{ padding: '0', overflow: 'hidden' }}>
             <div className="columns is-gapless">
-              
-              {/* Image on right */}
               <div className="column is-5">
                  <figure className="image h-100" style={{ height: '100%', minHeight: '400px' }}>
                     <img 
@@ -98,8 +88,6 @@ export default function WorkshopDetailsPage() {
                     />
                  </figure>
               </div>
-
-              {/* Details on left */}
               <div className="column is-7">
                 <div className="p-6">
                     <h1 className="title is-2 mb-3" style={{ fontWeight: 800, color: '#2d3436' }}>{workshop.title}</h1>
@@ -119,13 +107,10 @@ export default function WorkshopDetailsPage() {
                             📊 {getDifficultyText(workshop.difficulty)}
                         </span>
                     </div>
-                    
                     <p className="subtitle is-5 has-text-grey" style={{ lineHeight: '1.8' }}>
                         {workshop.description || 'אין תיאור לסדנה זו.'}
                     </p>
-                    
                     <hr style={{backgroundColor: '#f0f0f0'}} />
-                    
                     <div className="level is-mobile mt-5">
                         <div className="level-right">
                             <div>
@@ -134,7 +119,6 @@ export default function WorkshopDetailsPage() {
                             </div>
                         </div>
                         <div className="level-left">
-                            {/* --- Correction: Removed is-success --- */}
                             <button className="button gradient-button is-large px-6 shadow-lg">
                                 הירשם עכשיו ✨
                             </button>
@@ -144,8 +128,6 @@ export default function WorkshopDetailsPage() {
               </div>
             </div>
           </div>
-
-          {/* --- Mentors --- */}
           <div className="mt-6">
             <h2 className="title is-4 has-text-centered mb-5" style={{color: '#6c5ce7'}}>המדריכים שלנו 🎓</h2>
             <div className="columns is-centered">

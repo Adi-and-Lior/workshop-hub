@@ -5,14 +5,11 @@ import { getCities } from '../services/citiesService';
 
 export default function FormPage() {
   const navigate = useNavigate();
-  
   const [cities, setCities] = useState([]);
   const [loadingCities, setLoadingCities] = useState(true);
   const [isSubmitting, setIsSubmitting] = useState(false);
-
   const [selectedCategory, setSelectedCategory] = useState('arts');
   const [customCategory, setCustomCategory] = useState('');
-
   const [formData, setFormData] = useState({
     title: '',
     price: '',
@@ -81,7 +78,6 @@ export default function FormPage() {
 
   return (
     <div>
-      {/* --- כותרת (Hero) נקייה ומקצועית --- */}
       <div className="hero-section" style={{ paddingBottom: '6rem', borderRadius: '0 0 30px 30px' }}>
         <div className="container has-text-centered">
           <h1 className="title is-2 has-text-white mb-2" style={{ fontWeight: 700 }}>
@@ -92,8 +88,6 @@ export default function FormPage() {
           </p>
         </div>
       </div>
-
-      {/* --- הטופס המקצועי --- */}
       <div className="section" style={{ marginTop: '-5rem' }}>
         <div className="container" style={{ maxWidth: '900px' }}>
           
@@ -101,21 +95,19 @@ export default function FormPage() {
             onSubmit={handleSubmit} 
             className="box purple-form-box"
             style={{ 
-              borderRadius: '12px', // עיגול עדין סטנדרטי
+              borderRadius: '12px', 
               padding: '3rem', 
               border: '1px solid #eee',
-              boxShadow: '0 15px 35px rgba(0,0,0,0.05)' // צללית רכה ומודרנית
+              boxShadow: '0 15px 35px rgba(0,0,0,0.05)'
             }}
-          >
-            
-            {/* שורה ראשונה: כותרת ומחיר */}
+          >  
             <div className="columns is-variable is-5 mb-4">
               <div className="column is-8">
                 <div className="field">
                   <label className="label has-text-grey-dark">שם הסדנה</label>
                   <div className="control">
                     <input 
-                      className="input is-medium" // הורדנו את is-rounded
+                      className="input is-medium" 
                       type="text" 
                       name="title" 
                       value={formData.title} 
@@ -144,8 +136,6 @@ export default function FormPage() {
                 </div>
               </div>
             </div>
-
-            {/* שורה שניה: קטגוריה וקושי */}
             <div className="columns is-variable is-5 mb-4">
               <div className="column">
                 <div className="field">
@@ -185,7 +175,6 @@ export default function FormPage() {
                   </div>
                 )}
               </div>
-
               <div className="column">
                  <div className="field">
                     <label className="label has-text-grey-dark">רמת קושי</label>
@@ -201,8 +190,6 @@ export default function FormPage() {
                   </div>
               </div>
             </div>
-
-            {/* שורה שלישית: מיקום */}
             <div className="field mb-5">
               <label className="label has-text-grey-dark">מיקום הסדנה</label>
               <div className="control">
@@ -217,8 +204,6 @@ export default function FormPage() {
                 </datalist>
               </div>
             </div>
-
-            {/* תיאור */}
             <div className="field mb-5">
               <label className="label has-text-grey-dark">תיאור מלא</label>
               <div className="control">
@@ -232,8 +217,6 @@ export default function FormPage() {
                 ></textarea>
               </div>
             </div>
-
-            {/* העלאת תמונה - עיצוב נקי */}
             <div className="field mb-6">
               <label className="label has-text-grey-dark">תמונה ראשית</label>
               <div className="file has-name is-fullwidth is-boxed">
@@ -241,7 +224,7 @@ export default function FormPage() {
                   <input className="file-input" type="file" accept="image/*" onChange={handleImageUpload} />
                   <span className="file-cta">
                     <span className="file-icon">
-                      <i className="fas fa-upload"></i> {/* אם אין פונט-אוסום זה פשוט לא יציג, לא נורא */}
+                      <i className="fas fa-upload"></i> 
                     </span>
                     <span className="file-label has-text-centered">
                       לחץ כאן להעלאת תמונה
@@ -263,8 +246,7 @@ export default function FormPage() {
             </div>
 
             <hr className="mb-5" />
-
-            {/* כפתור שמירה מעוצב עם הגרדיאנט של האתר */}
+            
             <div className="buttons is-right">
                 <button 
                   className={`button is-medium px-6 gradient-button ${isSubmitting ? 'is-loading' : ''}`}

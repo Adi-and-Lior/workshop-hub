@@ -1,8 +1,5 @@
-// src/services/workshopService.js
 // כתובת API זמנית עד שיהיה שרת ודאטה בייס
 const API_URL = "https://692b3c227615a15ff24f1800.mockapi.io/workshops";
-
-// פונקציה לקבלת כל הסדנאות (עבור HomePage)
 export const getAllWorkshops = async () => {
   try {
     const response = await fetch(API_URL);
@@ -13,8 +10,6 @@ export const getAllWorkshops = async () => {
     throw error;
   }
 };
-
-// פונקציה לקבלת סדנה בודדת (עבור DetailsPage)
 export const getWorkshopById = async (id) => {
   try {
     const response = await fetch(`${API_URL}/${id}`);
@@ -25,8 +20,6 @@ export const getWorkshopById = async (id) => {
     throw error;
   }
 };
-
-// פונקציה ליצירת סדנה חדשה (עבור FormPage)
 export const createWorkshop = async (workshopData) => {
   try {
     const response = await fetch(API_URL, {

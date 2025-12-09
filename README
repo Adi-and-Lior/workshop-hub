@@ -1,0 +1,50 @@
+# Workshop Hub
+
+Final project for the React course (Assignment H-1).
+A Single Page Application (SPA) for managing and registering for workshops.
+
+## Project Description
+
+The application allows users to browse a catalog of workshops, filter them by category and city, view detailed information including mentors, and add new workshops to the system.
+
+**Tech Stack:** React 18 (Vite), React Router DOM, Bulma CSS.
+
+## Pages & Implementation
+
+### 1. Home Page (src/pages/HomePage.jsx)
+Main catalog page.
+* Fetches workshop data and city list using `Promise.all`.
+* Implements client-side filtering for both category and city.
+* Passes data to `WorkshopCard` components via props.
+* Handles loading and error states.
+
+### 2. Form Page (src/pages/FormPage.jsx)
+A page to add new workshops.
+* Uses a single state object for form data.
+* Includes validation for required fields.
+* Features a city autocomplete input using the Israeli Government API (Data.gov.il).
+* Handles image file selection and preview.
+
+### 3. Details Page (src/pages/WorkshopDetailsPage.jsx)
+Displays specific workshop information.
+* Fetches workshop details from MockAPI based on the ID in the URL.
+* Fetches a list of random mentors from `randomuser.me` API.
+* Displays different badges based on the workshop's difficulty level.
+
+## External APIs
+
+1.  **MockAPI:** Backend for storing workshop data.
+2.  **Data.gov.il:** Provides the list of cities for the form and filters.
+3.  **RandomUser:** Generates placeholder data for mentors.
+
+## How to Run
+
+1.  Install dependencies:
+    ```bash
+    npm install
+    ```
+
+2.  Start the project:
+    ```bash
+    npm run dev
+    ```

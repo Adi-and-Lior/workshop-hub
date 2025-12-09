@@ -7,16 +7,11 @@ import { getCities } from '../services/citiesService';
 export default function HomePage() {
   const [workshops, setWorkshops] = useState([]);
   const [cities, setCities] = useState([]);
-  
-  // ניהול שגיאות וטעינה
   const [error, setError] = useState(null);
-  // מתחילים ישר ב-true, כך שלא צריך לשנות את זה ב-useEffect הראשון
   const [loading, setLoading] = useState(true);
-  
   const [categoryFilter, setCategoryFilter] = useState('');
   const [cityFilter, setCityFilter] = useState('');
 
-  // 1. פונקציית הליבה - רק מביאה נתונים (בלי לשנות loading ל-true בהתחלה)
   const fetchData = () => {
     Promise.all([getAllWorkshops(), getCities()])
       .then(([workshopsData, citiesData]) => {
@@ -31,19 +26,16 @@ export default function HomePage() {
       });
   };
 
-  // 2. useEffect - מפעיל את הפונקציה כשהדף עולה
   useEffect(() => {
     fetchData(); 
   }, []);
 
-  // 3. פונקציה מיוחדת לכפתור "נסה שנית"
   const handleRetry = () => {
-    setLoading(true); // כאן אנחנו כן צריכים להדליק את הטעינה מחדש
-    setError(null);   // ולאפס את השגיאה
-    fetchData();      // ואז להביא נתונים
+    setLoading(true);
+    setError(null);  
+    fetchData();   
   };
 
-  // --- לוגיקה לסינון וקטגוריות ---
   const getAvailableCategories = () => {
     const allCats = workshops.map(w => w.category);
     return [...new Set(allCats)];
@@ -76,7 +68,6 @@ export default function HomePage() {
 
   return (
     <div>
-      {/* --- חלק 1: Hero Section (באנר עליון) --- */}
       <div className="hero-section">
         <div className="container has-text-centered">
           <h1 className="title is-1 has-text-white mb-4">
@@ -87,15 +78,10 @@ export default function HomePage() {
           </p>
         </div>
       </div>
-
       <div className="section" style={{ marginTop: '-80px' }}>
         <div className="container">
-          
-          {/* --- חלק 2: סרגל חיפוש צף --- */}
-          <div className="search-container box">
+                    <div className="search-container box">
             <div className="columns is-vcentered">
-              
-              {/* חיפוש קטגוריה */}
               <div className="column">
                 <div className="field">
                   <label className="label is-small has-text-grey">מה מחפשים?</label>
@@ -115,8 +101,6 @@ export default function HomePage() {
                   </div>
                 </div>
               </div>
-
-              {/* חיפוש עיר */}
               <div className="column">
                 <div className="field">
                   <label className="label is-small has-text-grey">איפה?</label>
@@ -135,7 +119,6 @@ export default function HomePage() {
                 </div>
               </div>
 
-              {/* כפתור איפוס */}
               {(categoryFilter || cityFilter) && (
                 <div className="column is-narrow">
                   <button 
@@ -148,33 +131,23 @@ export default function HomePage() {
               )}
             </div>
           </div>
-
-          {/* --- חלק 3: תוצאות וסטטוסים --- */}
-          <div className="mt-6">
-            
-            {/* מצב טעינה */}
+          <div className="mt-6"> 
             {loading && (
                <div className="has-text-centered py-6">
                   <div className="button is-loading is-white is-large" style={{border: 'none', background: 'transparent'}}></div>
                   <p className="has-text-grey mt-2">טוען סדנאות...</p>
                </div>
             )}
-
-            {/* מצב שגיאה (אין אינטרנט) */}
             {!loading && error && (
                <div className="notification is-danger is-light has-text-centered p-5" style={{ borderRadius: '12px' }}>
                   <div className="is-size-1 mb-2">📡</div>
                   <h3 className="title is-5 has-text-danger-dark">אופס! {error}</h3>
-                  <p className="mb-4">נא לבדוק את החיבור ולנסות שוב.</p>
-                  
-                  {/* שימוש בפונקציית ה-Retry המתוקנת */}
+                  <p className="mb-4">נא לבדוק את החיבור ולנסות שוב.</p>                  
                   <button className="button is-danger is-outlined" onClick={handleRetry}>
                     🔄 נסה שנית
                   </button>
                </div>
             )}
-
-            {/* רשימת התוצאות (רק אם הכל תקין) */}
             {!loading && !error && (
               <div className="columns is-multiline">
                 {getFilteredWorkshops().length > 0 ? (
@@ -189,7 +162,6 @@ export default function HomePage() {
                     </div>
                   ))
                 ) : (
-                  // הודעה כשאין תוצאות לחיפוש
                   <div className="column is-12 has-text-centered py-6">
                     <div className="is-size-1 mb-2">🔍</div>
                     <p className="title is-4 has-text-grey-light">לא מצאנו סדנאות מתאימות</p>
@@ -198,9 +170,7 @@ export default function HomePage() {
                 )}
               </div>
             )}
-
           </div>
-          
         </div>
       </div>
     </div>

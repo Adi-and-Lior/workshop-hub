@@ -1,4 +1,3 @@
-// הכתובת של מאגר היישובים בישראל מתוך data.gov.il
 const CITIES_API_URL = 'https://data.gov.il/api/3/action/datastore_search?resource_id=5c78e9fa-c2e2-4771-93ff-7f400a12f7ba&limit=3000';
 
 export const getCities = async () => {
@@ -8,8 +7,6 @@ export const getCities = async () => {
       throw new Error('Failed to fetch cities');
     }
     const data = await response.json();
-    
-    // ה-API הממשלתי מחזיר את המידע בתוך result.records
     const cities = data.result.records.map(record => record['שם_ישוב'].trim()).filter(city => city !== 'לא רשום');
     
     return cities;
