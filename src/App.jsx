@@ -2,11 +2,10 @@ import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import FormPage from './pages/FormPage';
 import WorkshopDetailsPage from './pages/WorkshopDetailsPage';
-import NotFoundPage from './pages/NotFoundPage'; // <-- Import 1
+import NotFoundPage from './pages/NotFoundPage'; 
 import Footer from './components/Footer';
-import { FavoritesProvider, useFavorites } from './context/FavoritesContext'; // <-- Import 2
+import { FavoritesProvider, useFavorites } from './context/FavoritesContext'; 
 
-// רכיב עזר קטן להצגת מונה המועדפים בנאבר
 const FavoritesCounter = () => {
   const { favorites } = useFavorites();
   if (favorites.length === 0) return null;
@@ -19,7 +18,7 @@ const FavoritesCounter = () => {
 
 function App() {
   return (
-    <FavoritesProvider> {/* <-- עטיפה ב-Provider */}
+    <FavoritesProvider> {}
       <BrowserRouter
         future={{
           v7_startTransition: true,
@@ -32,13 +31,13 @@ function App() {
               <Link to="/" className="navbar-item">
                 <img src="/logo.png" alt="WorkShop Hub" style={{ maxHeight: '60px' }} />
               </Link>
-              {/* כאן אפשר להוסיף המבורגר אם רוצים */}
+              {}
             </div>
             <div className="navbar-menu">
               <div className="navbar-start">
                 <Link to="/" className="navbar-item">
                   קטלוג סדנאות 
-                  <FavoritesCounter /> {/* שימוש ב-Context בנאבר */}
+                  <FavoritesCounter /> {}
                 </Link>
                 <Link to="/add-workshop" className="navbar-item">הוספת סדנה</Link>
               </div>
@@ -50,7 +49,7 @@ function App() {
               <Route path="/" element={<HomePage />} />
               <Route path="/add-workshop" element={<FormPage />} />
               <Route path="/workshop/:id" element={<WorkshopDetailsPage />} />
-              <Route path="*" element={<NotFoundPage />} /> {/* <-- הוספת נתיב 404 */}
+              <Route path="*" element={<NotFoundPage />} /> {}
             </Routes>
           </div>
           <Footer />

@@ -1,7 +1,20 @@
 import React from 'react';
+import { useFavorites } from '../context/FavoritesContext';
+import { FaHeart, FaRegHeart } from 'react-icons/fa'; 
 
 export default function WorkshopCard(props) {
-  const { title, image, price, category, difficulty, city } = props;
+  const { id, title, image, price, category, difficulty, city } = props;
+  
+  const { isFavorite, toggleFavorite } = useFavorites();
+  
+  const isFav = isFavorite(id);
+
+  const handleFavoriteClick = (e) => {
+    e.preventDefault(); 
+    e.stopPropagation(); 
+    toggleFavorite(id);
+  };
+
   const getCategoryHebrew = (catEn) => {
     const dictionary = {
       'arts': 'אומנות', 'tech': 'טכנולוגיה', 'cooking': 'בישול',
@@ -24,7 +37,30 @@ export default function WorkshopCard(props) {
   };
 
   return (
-    <div className="card h-100" style={{ display: 'flex', flexDirection: 'column' }}>      
+    <div className="card h-100" style={{ display: 'flex', flexDirection: 'column', position: 'relative' }}>      
+      
+      {}
+      <button 
+        className="button is-white is-rounded"
+        onClick={handleFavoriteClick}
+        style={{
+          position: 'absolute',
+          top: '10px',
+          left: '10px', 
+          zIndex: 10,
+          border: 'none',
+          boxShadow: '0 2px 8px rgba(0,0,0,0.2)',
+          padding: '0.5rem',
+          height: 'auto'
+        }}
+      >
+        {isFav ? (
+          <FaHeart color="#ff3860" size={20} /> 
+        ) : (
+          <FaRegHeart color="#b2bec3" size={20} /> 
+        )}
+      </button>
+
       <div className="card-image">
         <figure className="image is-4by3">
           <img 
@@ -34,6 +70,7 @@ export default function WorkshopCard(props) {
           />
         </figure>
       </div>
+      
       <div className="card-content" style={{ flexGrow: 1, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
         <div>
           <p className="title is-5 mb-3" style={{ fontWeight: 700, color: '#2d3436' }}>
@@ -44,6 +81,7 @@ export default function WorkshopCard(props) {
                 className="tag" 
                 style={{ 
                     color: '#8e4dd3ff', 
+                    backgroundColor: '#f3e8ff' 
                 }}
              >
               {getCategoryHebrew(category)}
