@@ -1,24 +1,15 @@
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import FormPage from './pages/FormPage';
 import WorkshopDetailsPage from './pages/WorkshopDetailsPage';
 import NotFoundPage from './pages/NotFoundPage'; 
 import Footer from './components/Footer';
-import { FavoritesProvider, useFavorites } from './context/FavoritesContext'; 
-
-const FavoritesCounter = () => {
-  const { favorites } = useFavorites();
-  if (favorites.length === 0) return null;
-  return (
-    <span className="tag is-danger is-rounded is-light ml-2" style={{ fontWeight: 'bold' }}>
-      {favorites.length} ❤
-    </span>
-  );
-};
+import Header from './components/Header'; 
+import { FavoritesProvider } from './context/FavoritesContext'; 
 
 function App() {
   return (
-    <FavoritesProvider> {}
+    <FavoritesProvider>
       <BrowserRouter
         future={{
           v7_startTransition: true,
@@ -26,30 +17,15 @@ function App() {
         }}
       >
         <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
-          <nav className="navbar" role="navigation" aria-label="main navigation">
-            <div className="navbar-brand">
-              <Link to="/" className="navbar-item">
-                <img src="/logo.png" alt="WorkShop Hub" style={{ maxHeight: '60px' }} />
-              </Link>
-              {}
-            </div>
-            <div className="navbar-menu">
-              <div className="navbar-start">
-                <Link to="/" className="navbar-item">
-                  קטלוג סדנאות 
-                  <FavoritesCounter /> {}
-                </Link>
-                <Link to="/add-workshop" className="navbar-item">הוספת סדנה</Link>
-              </div>
-            </div>
-          </nav>
+          
+          <Header />
 
           <div className="container mt-5" style={{ flex: 1, paddingBottom: '2rem' }}>
             <Routes>
               <Route path="/" element={<HomePage />} />
               <Route path="/add-workshop" element={<FormPage />} />
               <Route path="/workshop/:id" element={<WorkshopDetailsPage />} />
-              <Route path="*" element={<NotFoundPage />} /> {}
+              <Route path="*" element={<NotFoundPage />} />
             </Routes>
           </div>
           <Footer />
