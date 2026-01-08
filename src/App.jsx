@@ -1,37 +1,37 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { useLocalStorage } from './hooks/useLocalStorage';
 import HomePage from './pages/HomePage';
 import FormPage from './pages/FormPage';
 import WorkshopDetailsPage from './pages/WorkshopDetailsPage';
 import NotFoundPage from './pages/NotFoundPage'; 
 import Footer from './components/Footer';
 import Header from './components/Header'; 
-import { FavoritesProvider } from './context/FavoritesContext'; 
 
 function App() {
+  const [theme] = useLocalStorage('app_theme', 'light');
+
   return (
-    <FavoritesProvider>
+    <div className={`theme-${theme}`} style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
       <BrowserRouter
         future={{
           v7_startTransition: true,
           v7_relativeSplatPath: true,
         }}
       >
-        <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
-          
-          <Header />
+        <Header />
 
-          <div className="container mt-5" style={{ flex: 1, paddingBottom: '2rem' }}>
-            <Routes>
-              <Route path="/" element={<HomePage />} />
-              <Route path="/add-workshop" element={<FormPage />} />
-              <Route path="/workshop/:id" element={<WorkshopDetailsPage />} />
-              <Route path="*" element={<NotFoundPage />} />
-            </Routes>
-          </div>
-          <Footer />
+        <div className="container mt-5" style={{ flex: 1, paddingBottom: '2rem' }}>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/add-workshop" element={<FormPage />} />
+            <Route path="/workshop/:id" element={<WorkshopDetailsPage />} />
+            <Route path="*" element={<NotFoundPage />} />
+          </Routes>
         </div>
+        <Footer />
       </BrowserRouter>
-    </FavoritesProvider>
+    </div>
   );
 }
+
 export default App;
