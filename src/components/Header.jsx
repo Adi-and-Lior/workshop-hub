@@ -1,18 +1,26 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useFavorites } from '../context/FavoritesContext';
+import { useSelector } from 'react-redux'; 
+import { useLocalStorage } from '../hooks/useLocalStorage';
 
 const FavoritesCounter = () => {
-  const { favorites } = useFavorites();
-  if (favorites.length === 0) return null;
+  const count = useSelector((state) => state.favorites.totalCount);
+  
+  if (count === 0) return null;
   return (
     <span className="tag is-danger is-rounded is-light ml-2" style={{ fontWeight: 'bold' }}>
-      {favorites.length} ❤
+      {count} ❤
     </span>
   );
 };
 
 export default function Header() {
+  const [theme, setTheme] = useLocalStorage('app_theme', 'light');
+
+  const toggleTheme = () => {
+    setTheme(theme === 'light' ? 'dark' : 'light');
+  };
+
   return (
     <nav className="navbar" role="navigation" aria-label="main navigation">
       <div className="navbar-brand">
@@ -20,13 +28,26 @@ export default function Header() {
           <img src="/logo.png" alt="WorkShop Hub" style={{ maxHeight: '60px' }} />
         </Link>
       </div>
-      <div className="navbar-menu">
+
+      <div className="navbar-menu is-active">
         <div className="navbar-start">
           <Link to="/" className="navbar-item">
             קטלוג סדנאות 
             <FavoritesCounter />
           </Link>
           <Link to="/add-workshop" className="navbar-item">הוספת סדנה</Link>
+        </div>
+
+        <div className="navbar-end">
+          <div className="navbar-item">
+            <button 
+              className="button is-rounded is-small is-light" 
+              onClick={toggleTheme}
+              title="החלף מצב תצוגה"
+            >
+              {theme === 'light' ? '☀️ יום' : '🌙 לילה'}
+            </button>
+          </div>
         </div>
       </div>
     </nav>
