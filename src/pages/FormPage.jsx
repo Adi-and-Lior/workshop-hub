@@ -10,6 +10,7 @@ export default function FormPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState('arts');
   const [customCategory, setCustomCategory] = useState('');
+  
   const [formData, setFormData] = useState({
     title: '',
     price: '',
@@ -26,7 +27,7 @@ export default function FormPage() {
         setLoadingCities(false);
       })
       .catch((err) => {
-        console.error("Error loading cities", err);
+        console.error("שגיאה בטעינת ערים:", err);
         setLoadingCities(false);
       });
   }, []);
@@ -36,6 +37,7 @@ export default function FormPage() {
     setFormData({ ...formData, [name]: value });
   };
 
+  // kbטיפול בהעלאת תמונה הגבלת גודל ל-60 
   const handleImageUpload = (e) => {
     const file = e.target.files[0];
     if (!file) return;
@@ -62,15 +64,16 @@ export default function FormPage() {
     const dataToSave = {
       ...formData,
       category: finalCategory,
+      createdAt: new Date().toISOString() 
     };
 
     try {
       await createWorkshop(dataToSave);
-      alert('הסדנה נוספה בהצלחה!');
-      navigate('/');
+      alert('הסדנה פורסמה בהצלחה! 🚀');
+      navigate('/'); 
     } catch (error) {
-      console.error("Failed to save:", error);
-      alert('שגיאה בשמירת הנתונים');
+      console.error("שגיאה בשמירה:", error);
+      alert('אופס! חלה שגיאה בשמירת הנתונים. נסה שנית מאוחר יותר.');
     } finally {
       setIsSubmitting(false);
     }
@@ -84,10 +87,11 @@ export default function FormPage() {
             יצירת סדנה חדשה
           </h1>
           <p className="subtitle is-6 has-text-light" style={{ opacity: 0.9 }}>
-            מלאו את הפרטים כדי לפרסם את הסדנה בקטלוג
+            מלאו את הפרטים כדי להוסיף את הסדנה שלכם לקטלוג
           </p>
         </div>
       </div>
+
       <div className="section" style={{ marginTop: '-5rem' }}>
         <div className="container" style={{ maxWidth: '900px' }}>
           
@@ -96,7 +100,7 @@ export default function FormPage() {
             className="box purple-form-box"
             style={{ 
               borderRadius: '12px', 
-              padding: '3rem', 
+              padding: '2.5rem', 
               border: '1px solid #eee',
               boxShadow: '0 15px 35px rgba(0,0,0,0.05)'
             }}
@@ -113,7 +117,7 @@ export default function FormPage() {
                       value={formData.title} 
                       onChange={handleChange} 
                       required minLength={3}
-                      placeholder="למשל: יסודות הצילום הדיגיטלי"
+                      placeholder="למשל: יסודות הצילום"
                     />
                   </div>
                 </div>
@@ -129,13 +133,14 @@ export default function FormPage() {
                       name="price" 
                       value={formData.price} 
                       onChange={handleChange} 
-                      required min={1}
+                      required min={0}
                       placeholder="0.00"
                     />
                   </div>
                 </div>
               </div>
             </div>
+
             <div className="columns is-variable is-5 mb-4">
               <div className="column">
                 <div className="field">
@@ -161,7 +166,7 @@ export default function FormPage() {
                 </div>
                 
                 {selectedCategory === 'other' && (
-                  <div className="field mt-2">
+                  <div className="field mt-2 animate__animated animate__fadeIn">
                      <div className="control">
                        <input 
                           className="input" 
@@ -175,6 +180,7 @@ export default function FormPage() {
                   </div>
                 )}
               </div>
+
               <div className="column">
                  <div className="field">
                     <label className="label has-text-grey-dark">רמת קושי</label>
@@ -190,14 +196,19 @@ export default function FormPage() {
                   </div>
               </div>
             </div>
+
             <div className="field mb-5">
-              <label className="label has-text-grey-dark">מיקום הסדנה</label>
-              <div className="control">
+              <label className="label has-text-grey-dark">מיקום הסדנה (עיר)</label>
+              <div className={`control ${loadingCities ? 'is-loading' : ''}`}>
                 <input 
-                  className={`input is-medium ${loadingCities ? 'is-loading' : ''}`}
-                  type="text" list="cities-list" name="city"
-                  value={formData.city} onChange={handleChange}
-                  placeholder="הקלד עיר לחיפוש..." disabled={loadingCities}
+                  className="input is-medium"
+                  type="text" 
+                  list="cities-list" 
+                  name="city"
+                  value={formData.city} 
+                  onChange={handleChange}
+                  placeholder={loadingCities ? "טוען רשימת ערים..." : "הקלד שם עיר לבחירה..."} 
+                  required
                 />
                 <datalist id="cities-list">
                   {cities.map((city, index) => <option key={index} value={city} />)}
@@ -205,41 +216,41 @@ export default function FormPage() {
               </div>
             </div>
             <div className="field mb-5">
-              <label className="label has-text-grey-dark">תיאור מלא</label>
+              <label className="label has-text-grey-dark">תיאור הסדנה</label>
               <div className="control">
                 <textarea 
                   className="textarea" 
                   name="description" 
                   value={formData.description} 
                   onChange={handleChange}
-                  rows="5"
-                  placeholder="פרט על התכנים, הציוד הנדרש ומה המשתתפים יקבלו..."
+                  rows="4"
+                  required
+                  placeholder="ספרו קצת על הסדנה, למי היא מתאימה ומה הערך המוסף..."
                 ></textarea>
               </div>
             </div>
+
             <div className="field mb-6">
               <label className="label has-text-grey-dark">תמונה ראשית</label>
               <div className="file has-name is-fullwidth is-boxed">
                 <label className="file-label">
                   <input className="file-input" type="file" accept="image/*" onChange={handleImageUpload} />
-                  <span className="file-cta">
-                    <span className="file-icon">
-                      <i className="fas fa-upload"></i> 
-                    </span>
+                  <span className="file-cta" style={{ backgroundColor: '#f9f9f9' }}>
+                    <span className="file-icon">☁️</span>
                     <span className="file-label has-text-centered">
-                      לחץ כאן להעלאת תמונה
+                       לחץ להעלאת תמונה
                     </span>
                   </span>
-                  <span className="file-name">
-                    {formData.image ? 'קובץ תמונה נבחר והוטען' : 'לא נבחר קובץ'}
+                  <span className="file-name has-text-centered">
+                    {formData.image ? '✅ תמונה נבחרה' : 'לא נבחר קובץ (מוגבל ל-60KB)'}
                   </span>
                 </label>
               </div>
               
               {formData.image && (
-                  <div className="mt-4 p-2" style={{ border: '1px dashed #ccc', borderRadius: '8px', display: 'inline-block' }}>
-                      <figure className="image is-128x128">
-                          <img src={formData.image} alt="Preview" style={{ objectFit: 'cover', borderRadius: '4px' }} />
+                  <div className="mt-4 has-text-centered">
+                      <figure className="image is-128x128 is-inline-block shadow-sm" style={{ border: '2px solid #6c5ce7', borderRadius: '12px', overflow: 'hidden' }}>
+                          <img src={formData.image} alt="Preview" style={{ objectFit: 'cover', height: '100%' }} />
                       </figure>
                   </div>
               )}
@@ -247,14 +258,26 @@ export default function FormPage() {
 
             <hr className="mb-5" />
             
-            <div className="buttons is-right">
-                <button 
-                  className={`button is-medium px-6 gradient-button ${isSubmitting ? 'is-loading' : ''}`}
-                >
-                 פרסם סדנה...🚀
-                </button>
+            <div className="field is-grouped is-grouped-right">
+                <p className="control">
+                  <button 
+                    type="button" 
+                    className="button is-light is-medium px-5" 
+                    onClick={() => navigate('/')}
+                    disabled={isSubmitting}
+                  >
+                    ביטול
+                  </button>
+                </p>
+                <p className="control">
+                  <button 
+                    type="submit"
+                    className={`button is-medium px-6 gradient-button ${isSubmitting ? 'is-loading' : ''}`}
+                  >
+                   פרסם סדנה... 🚀
+                  </button>
+                </p>
             </div>
-            
           </form>
         </div>
       </div>
