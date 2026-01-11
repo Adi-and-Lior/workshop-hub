@@ -1,8 +1,7 @@
-// src/main.jsx
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import { Provider } from 'react-redux'; // ייבוא ה-Provider של Redux
-import { store } from './store/store'; // ייבוא ה-Store שיצרנו
+import { Provider } from 'react-redux'; 
+import { store } from './store/store'; 
 import App from './App.jsx'
 import 'bulma/css/bulma.min.css';
 import './App.css';

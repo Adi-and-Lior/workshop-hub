@@ -1,5 +1,5 @@
 // כתובת API זמנית עד שיהיה שרת ודאטה בייס
-const API_URL = "https://692b3c227615a15ff24f1800.mockapi.io/workshops";
+export const API_URL = "https://692b3c227615a15ff24f1800.mockapi.io/workshops";
 export const getAllWorkshops = async () => {
   try {
     const response = await fetch(API_URL);
