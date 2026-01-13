@@ -37,7 +37,6 @@ export default function FormPage() {
     setFormData({ ...formData, [name]: value });
   };
 
-  // kbטיפול בהעלאת תמונה הגבלת גודל ל-60 
   const handleImageUpload = (e) => {
     const file = e.target.files[0];
     if (!file) return;

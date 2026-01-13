@@ -1,62 +1,39 @@
-# Workshop Hub 🎨
+# Workshop Hub
 
 Final project for the React course (Assignment H-2).
 A Single Page Application (SPA) for managing and registering for workshops.
 
 ## Project Description
-
 The application allows users to browse a catalog of workshops, filter them by category and city, view detailed information including mentors, and add new workshops to the system.
 
-## 🛠️ Tech Stack
-* **React 18 (Vite)**
-* **React Router DOM** (New: For navigation)
-* **Context API** (New: For global state)
-* **Bulma CSS** (For styling)
+## Tech Stack
+* React 18 (Vite)
+* React Router DOM - For navigation management
+* Context API - For global state management
+* Bulma CSS - For styling
 
-## 🚦 Routes & Pages
+## Routes and Pages
+The application uses React Router to manage the following pages:
 
-I used React Router to manage navigation between the following pages:
+* Home Page (/): Main catalog page. It fetches workshop data and the city list using Promise.all and implements client-side filtering. Data is passed to WorkshopCard components via props.
+* Add Workshop Page (/add-workshop): A page to add new workshops. It uses a single state object for form data with validation, features city autocomplete using the Israeli Government API, and handles image file selection with preview.
+* Workshop Details Page (/workshop/:id): Displays specific information from MockAPI based on the URL ID. It fetches random mentors from the randomuser.me API and displays badges based on difficulty level.
+* Not Found Page (*): Handles 404 errors for invalid URLs.
 
-* **`/` - Home Page** (`src/pages/HomePage.jsx`)
-  Main catalog page.
-  * Fetches workshop data and city list using `Promise.all`.
-  * Implements client-side filtering for both category and city.
-  * Passes data to `WorkshopCard` components via props.
+## Global State (Context)
+The project uses FavoritesContext to manage the user's favorite workshops:
+* It stores the IDs of the workshops the user liked.
+* The Navbar displays a counter showing the total number of favorite items.
+* Workshop cards allow users to toggle the selection to add or remove workshops from the list.
 
-* **`/add-workshop` - Form Page** (`src/pages/FormPage.jsx`)
-  A page to add new workshops.
-  * Uses a single state object for form data with validation.
-  * Features a city autocomplete input using the Israeli Government API.
-  * Handles image file selection and preview.
+## External APIs
+1. MockAPI: Backend for storing and retrieving workshop data.
+2. Data.gov.il: Provides the list of cities for the form and filters.
+3. RandomUser: Generates placeholder data for mentors.
 
-* **`/workshop/:id` - Details Page** (`src/pages/WorkshopDetailsPage.jsx`)
-  Displays specific workshop information.
-  * Fetches workshop details from MockAPI based on the ID in the URL.
-  * Fetches a list of random mentors from `randomuser.me` API.
-  * Displays badges based on difficulty level.
-
-* **`*` - Not Found Page** (`src/pages/NotFoundPage.jsx`)
-  Handles 404 errors for invalid URLs.
-
-## ❤️ Global State (Context)
-
-I created a `FavoritesContext` to manage the user's favorite workshops across the application.
-
-* **What it stores:** A list of IDs of the workshops the user liked.
-* **How it is used:**
-  1. **Navbar:** Displays a counter showing the total number of favorite items.
-  2. **Workshop Card:** Allows users to toggle the "Heart" button to add or remove a workshop from the list.
-
-## 🌐 External APIs
-
-1. **MockAPI:** Backend for storing workshop data.
-2. **Data.gov.il:** Provides the list of cities for the form and filters.
-3. **RandomUser:** Generates placeholder data for mentors.
-
-## 🚀 How to Run
-
+## How to Run
 1. Install dependencies:
-   npm install
+npm install
 
 2. Start the project:
-   npm run dev
+npm run dev

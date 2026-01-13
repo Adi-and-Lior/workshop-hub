@@ -1,4 +1,4 @@
-// כתובת API זמנית עד שיהיה שרת ודאטה בייס
+// Temporary API address until there is a server and database
 export const API_URL = "https://692b3c227615a15ff24f1800.mockapi.io/workshops";
 export const getAllWorkshops = async () => {
   try {
