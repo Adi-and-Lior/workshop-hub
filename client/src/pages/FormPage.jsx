@@ -2,8 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { createWorkshop, updateWorkshop, getWorkshopById } from '../services/workshopService';
 import { useFetch } from '../hooks/useFetch'; 
-
-const CITIES_API_URL = 'https://data.gov.il/api/3/action/datastore_search?resource_id=5c78e9fa-c2e2-4771-93ff-7f400a12f7ba&limit=3000';
+import { CITIES_API_URL } from '../services/citiesService';
 
 export default function FormPage() {
   const { id } = useParams();

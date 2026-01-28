@@ -1,5 +1,5 @@
-export const BASE_URL = "http://localhost:5000/api"; 
-export const API_URL = `${BASE_URL}/workshops`;
+export const BASE_URL = import.meta.env.VITE_API_URL;
+export const API_URL = `${BASE_URL}/api/workshops`;
 
 const getAuthHeaders = () => {
   let token = localStorage.getItem('app_token');

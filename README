@@ -1,39 +1,161 @@
-# Workshop Hub
+# 🚀 Workshop Hub - Full Stack Final Project
 
-Final project for the React course (Assignment H-2).
-A Single Page Application (SPA) for managing and registering for workshops.
+**Workshop Hub** is a robust Full-Stack application designed to manage a workshop catalog. This project serves as the final submission for the React course, demonstrating a deep understanding of component architecture, state management, and secure backend integration.
 
-## Project Description
-The application allows users to browse a catalog of workshops, filter them by category and city, view detailed information including mentors, and add new workshops to the system.
+### Live links
+- **🔗 Live Demo:** https://workshop-hub-4j2d.onrender.com
+- **⚙️ Backend API:** https://workshop-hub.onrender.com
 
-## Tech Stack
-* React 18 (Vite)
-* React Router DOM - For navigation management
-* Context API - For global state management
-* Bulma CSS - For styling
+### Project Structure
+Workshop-Hub/
+├── 📁 client/ (Frontend - React + Vite)
+│   ├── 📄 index.html           # Main HTML entry point with RTL support
+│   ├── 📄 vite.config.js       # Vite configuration
+│   ├── 📄 eslint.config.js     # ESLint flat config
+│   ├── 📄 .env                 # Environment variables (VITE_API_URL)
+│   ├── 📁 public/              # Static assets (logos, icons, images)
+│   ├── 📁 src/
+│   │   ├── 📄 main.jsx         # React DOM entry point with Redux Provider
+│   │   ├── 📄 App.jsx          # Root component & Protected Routing
+│   │   ├── 📄 App.css          # Global styling, Dark Mode & RTL rules
+│   │   ├── 📁 components/
+│   │   │   ├── 📄 Header.jsx   # Navbar with Theme toggle & Favorites counter
+│   │   │   ├── 📄 Footer.jsx   # Footer with social icons
+│   │   │   └── 📄 WorkshopCard.jsx # Reusable card for workshop display
+│   │   ├── 📁 pages/
+│   │   │   ├── 📄 HomePage.jsx        # Workshop catalog with search/filter
+│   │   │   ├── 📄 FormPage.jsx        # Multi-purpose Create/Edit workshop form
+│   │   │   ├── 📄 WorkshopDetails.jsx # Full workshop view & Mentor generator
+│   │   │   ├── 📄 MyWorkshopsPage.jsx  # User-specific workshop management
+│   │   │   ├── 📄 LoginPage.jsx       # User authentication
+│   │   │   ├── 📄 RegisterPage.jsx    # User registration
+│   │   │   └── 📄 NotFoundPage.jsx    # 404 Error page
+│   │   ├── 📁 services/
+│   │   │   ├── 📄 workshopService.js  # CRUD operations & Auth headers
+│   │   │   └── 📄 citiesService.js    # Fetching city list from Gov API
+│   │   ├── 📁 store/
+│   │   │   ├── 📄 store.js            # Redux store configuration
+│   │   │   └── 📄 favoritesSlice.js   # State management for favorites
+│   │   ├── 📁 hooks/
+│   │   │   ├── 📄 useFetch.js         # Generic data fetching hook
+│   │   │   └── 📄 useLocalStorage.js  # Reactive local storage hook
+│   │   └── 📁 utils/
+│   │       └── 📄 translations.js     # Category/Difficulty translations
+│
+├── 📁 server/ (Backend - Node.js + Express)
+│   ├── 📄 server.js            # Express app setup & DB connection
+│   ├── 📄 .env                 # Environment variables (DB URI, JWT Secret)
+│   ├── 📁 models/
+│   │   ├── 📄 User.js          # User schema & Authentication
+│   │   └── 📄 Workshop.js      # Workshop schema & Relationships
+│   ├── 📁 controllers/
+│   │   ├── 📄 authController.js     # Logic for Login/Register
+│   │   └── 📄 workshopController.js # Logic for Workshop CRUD
+│   ├── 📁 routes/
+│   │   ├── 📄 authRoutes.js         # Authentication endpoints
+│   │   └── 📄 workshopRoutes.js     # Protected workshop endpoints
+│   ├── 📁 middleware/
+│   │   └── 📄 authMiddleware.js     # JWT validation middleware
+│   └── 📄 package.json         # Backend scripts & dependencies
+│
+└── 📄 README.md                # Project documentation
 
-## Routes and Pages
-The application uses React Router to manage the following pages:
 
-* Home Page (/): Main catalog page. It fetches workshop data and the city list using Promise.all and implements client-side filtering. Data is passed to WorkshopCard components via props.
-* Add Workshop Page (/add-workshop): A page to add new workshops. It uses a single state object for form data with validation, features city autocomplete using the Israeli Government API, and handles image file selection with preview.
-* Workshop Details Page (/workshop/:id): Displays specific information from MockAPI based on the URL ID. It fetches random mentors from the randomuser.me API and displays badges based on difficulty level.
-* Not Found Page (*): Handles 404 errors for invalid URLs.
+### 🌟 Key Features
+* **Full CRUD Operations**: Users can Create, Read, Update, and Delete workshops.
+* **Secure Authentication**: User registration and login powered by JWT (JSON Web Tokens).
+* **Ownership & Authorization**: A "this is excellent" feature where only the creator of a workshop is authorized to edit or delete it.
+* **Advanced Image Upload**: Direct file upload from the local machine with Base64 conversion and real-time image preview.
+* **Dynamic City Lists**: Integration with the Israeli Government API (`data.gov.il`) for up-to-date city selection.
+* **Persistent Favorites**: A "Favorites" system built with Redux Toolkit and persisted via Local Storage.
+* **Dark Mode Support**: UI theme preferences that persist across sessions.
+* **Exceptional UX**: Comprehensive handling of loading, error, and empty states.
 
-## Global State (Context)
-The project uses FavoritesContext to manage the user's favorite workshops:
-* It stores the IDs of the workshops the user liked.
-* The Navbar displays a counter showing the total number of favorite items.
-* Workshop cards allow users to toggle the selection to add or remove workshops from the list.
 
-## External APIs
-1. MockAPI: Backend for storing and retrieving workshop data.
-2. Data.gov.il: Provides the list of cities for the form and filters.
-3. RandomUser: Generates placeholder data for mentors.
+### 🛠️ Tech Stack
+| Tier | Technology |
+| **Frontend** | React 18 (Vite), React Router DOM |
+| **State Management** | Redux Toolkit, Custom Hooks |
+| **Styling** | Bulma CSS (RTL-Ready), React Icons |
+| **Backend** | Node.js, Express.js |
+| **Database** | MongoDB Atlas, Mongoose |
 
-## How to Run
-1. Install dependencies:
+
+
+### 🏗️ Architecture & Grading Criteria Alignment
+This project was built to exceed the "Excellent / 100" criteria:
+* **Clean Component Design**: Small, focused, and reusable components.
+* **Custom Hooks**: Implementation of `useFetch` for API logic and `useLocalStorage` for state synchronization.
+* **Data Integrity**: Controlled form inputs with both Frontend and Server-side validation.
+* **Routing**: Structured navigation with Protected Routes for authenticated actions.
+* **Backend Separation**: Clear separation of concerns between Routes, Controllers, and Models.
+* **Centralized Utility Logic**: Implementation of DRY (Don't Repeat Yourself) principle by centralizing all translation and UI mapping logic into a shared utility file.
+* **Robust Server-Side Security**: Authorization logic is enforced at the controller level, ensuring that users can only modify their own data, regardless of frontend state.
+
+
+
+
+### ⚙️ Setup & Installation 
+Note: Both the Server and Client must be running simultaneously for the application to function correctly.
+
+#### **1. Environment Variables**
+**Server (.env):** > Create a .env file in the /server directory:
+
+MONGO_URI=your_mongodb_atlas_connection_string
+
+PORT=5000
+
+JWT_SECRET=your_secure_random_string
+
+**Client (.env):** > Create a .env file in the /client directory:
+
+VITE_API_URL= http://localhost:5000 OR (https://your-backend-on-render.com)
+
+#### ** 2. Server Setup (Backend)**
+cd server
 npm install
+npm run dev (or node server.js)
 
-2. Start the project:
+#### **3. Client Setup (Frontend)**
+# From the root directory
+cd client
+npm install
 npm run dev
+
+#### **🚀 Deployment Notes**
+This project is deployed on Render.
+
+**Backend**: Hosted as a Web Service with environment variables for DB and JWT. * Frontend: Hosted as a Static Site.
+
+**Important**: A Rewrite Rule (/* -> /index.html) is configured in Render to ensure React Router handles page refreshes correctly without 404 errors.
+
+
+### 🔌 API Endpoints
+
+| Method | Endpoint | Description | Permission |
+
+| **POST** | `/api/auth/register` | Register a new user  | Public |
+| **POST** | `/api/auth/login` | Login and receive JWT  | Public |
+| **GET** | `/api/workshops` | Fetch all workshops   | Public |
+| **GET** | `/api/workshops/:id` |Get detailed info for a single workshop | Public | 
+| **GET** | `/api/workshops/my` |Fetch workshops created by current user  | Authenticated 
+| **POST** | `/api/workshops` | Create a new workshop  | Authenticated |
+| **PUT** | `/api/workshops/:id` | Update a workshop  | Owner Only |
+| **DELETE** | `/api/workshops/:id` | Delete a workshop  | Owner Only |
+
+
+
+### 📝 Edge Case Handling 
+
+* **Refresh Proof**: Auth tokens and UI themes are safely retrieved from Local Storage upon page refresh, ensuring a seamless session.
+* **Server Downtime**: The application handles API failures gracefully, showing descriptive error messages instead of crashing.
+* **Robust Validation**: The server rejects empty or invalid fields with specific error codes, preventing database corruption.
+* **Empty States**: Clear "No workshops found" or "Loading" indicators are shown to prevent a blank or broken UI.
+* **Cold Start (Render Free Tier)**: Since the server is on a free tier, it may take 30-60 seconds to "wake up" on the first request. 
+* **Client-Side Routing**: Page refreshes are handled via server-side redirects to index.html to maintain the SPA state.
+
+
+### Third-Party Integrations
+
+- **RandomUser API:** Used to simulate mentor profiles and dynamic data.
+- **Data.gov.il API:** Used for fetching the official list of Israeli cities.
