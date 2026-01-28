@@ -55,7 +55,7 @@ Workshop-Hub/
 │   │   ├── 📄 authRoutes.js         # Authentication endpoints
 │   │   └── 📄 workshopRoutes.js     # Protected workshop endpoints
 │   ├── 📁 middleware/
-│   │   └── 📄 authMiddleware.js     # JWT validation middleware
+│   │   └── 📄 authMiddleware.js     # JWT validation & Role-based access (isAdmin)
 │   └── 📄 package.json         # Backend scripts & dependencies
 │
 └── 📄 README.md                # Project documentation
@@ -70,6 +70,7 @@ Workshop-Hub/
 * **Persistent Favorites**: A "Favorites" system built with Redux Toolkit and persisted via Local Storage.
 * **Dark Mode Support**: UI theme preferences that persist across sessions.
 * **Exceptional UX**: Comprehensive handling of loading, error, and empty states.
+* **Admin Role & Management**: A comprehensive administrative layer allowing users with the "admin" role to manage, edit, and delete any workshop on the platform, regardless of ownership.
 
 
 ### 🛠️ Tech Stack
@@ -140,8 +141,8 @@ This project is deployed on Render.
 | **GET** | `/api/workshops/:id` |Get detailed info for a single workshop | Public | 
 | **GET** | `/api/workshops/my` |Fetch workshops created by current user  | Authenticated 
 | **POST** | `/api/workshops` | Create a new workshop  | Authenticated |
-| **PUT** | `/api/workshops/:id` | Update a workshop  | Owner Only |
-| **DELETE** | `/api/workshops/:id` | Delete a workshop  | Owner Only |
+| **PUT** | `/api/workshops/:id` | Update a workshop  | Owner OR Admin |
+| **DELETE** | `/api/workshops/:id` | Delete a workshop  | Owner OR Admin |
 
 
 

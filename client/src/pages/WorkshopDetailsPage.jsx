@@ -22,7 +22,12 @@ export default function WorkshopDetailsPage() {
   const { data: mentorsData, loading: mentorsLoading } = useFetch(`https://randomuser.me/api/?results=3&seed=workshop-${id}`);
 
   const mentors = mentorsData?.results || [];
-  const isOwner = workshop && user && (workshop.createdBy?._id === user.id || workshop.createdBy === user.id);
+
+  const isOwner = workshop && user && (
+    workshop.createdBy?._id === user.id || 
+    workshop.createdBy === user.id || 
+    user.role === 'admin'
+  );
 
   const handleDelete = async () => {
     if (window.confirm('האם אתה בטוח שברצונך למחוק את הסדנה הזו?')) {
@@ -103,6 +108,7 @@ export default function WorkshopDetailsPage() {
                         {workshop.createdBy?.username && (
                           <span className="tag is-info is-light">👤 נוצר ע"י: {workshop.createdBy.username}</span>
                         )}
+                        {user?.role === 'admin' && <span className="tag is-danger is-light">🛡️ Admin Mode</span>}
                     </div>
 
                     <p className="subtitle is-5 has-text-grey" style={{ lineHeight: '1.8' }}>
@@ -141,6 +147,29 @@ export default function WorkshopDetailsPage() {
               </div>
             </div>
           </div>
+          <div className="mt-6">
+            <h2 className="title is-3 mb-5">הכירו את המדריכים 🎓</h2>
+            {mentorsLoading ? (
+              <p>טוען מדריכים...</p>
+            ) : (
+              <div className="columns is-multiline">
+                {mentors.map((mentor, index) => (
+                  <div key={index} className="column is-4">
+                    <div className="box is-flex is-align-items-center" style={{ borderRadius: '15px' }}>
+                      <figure className="image is-64x64 ml-4">
+                        <img className="is-rounded" src={mentor.picture.medium} alt={mentor.name.first} />
+                      </figure>
+                      <div>
+                        <p className="title is-5 mb-1">{mentor.name.first} {mentor.name.last}</p>
+                        <p className="subtitle is-6 has-text-grey">מדריך סדנת {translateCategory(workshop.category)}</p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+          
         </div>
       </div>
     </div>

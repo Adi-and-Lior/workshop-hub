@@ -44,7 +44,8 @@ export const login = async (req, res) => {
 
     const payload = { 
       userId: user._id,
-      username: user.username 
+      username: user.username,
+      role: user.role
     };
 
     const token = jwt.sign(
@@ -55,7 +56,7 @@ export const login = async (req, res) => {
 
     res.json({
       token,
-      user: { id: user._id, username: user.username }
+      user: { id: user._id, username: user.username ,role: user.role}
     });
 
   } catch (err) {

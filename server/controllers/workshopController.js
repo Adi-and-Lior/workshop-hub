@@ -46,8 +46,11 @@ export const updateWorkshop = async (req, res) => {
       return res.status(404).json({ message: "הסדנה לא נמצאה" });
     }
 
-    if (workshop.createdBy.toString() !== req.user.userId) {
-      return res.status(403).json({ message: "אין לך הרשאה לעדכן סדנה שלא יצרת" });
+    const isOwner = workshop.createdBy.toString() === req.user.userId;
+    const isAdmin = req.user.role === 'admin';
+
+    if (!isOwner && !isAdmin) {
+      return res.status(403).json({ message: "אין לך הרשאה לעדכן סדנה זו" });
     }
 
     const updatedWorkshop = await Workshop.findByIdAndUpdate(
@@ -80,8 +83,11 @@ export const deleteWorkshop = async (req, res) => {
       return res.status(404).json({ message: "הסדנה למחיקה לא נמצאה" });
     }
 
-    if (workshop.createdBy.toString() !== req.user.userId) {
-      return res.status(403).json({ message: "אין לך הרשאה למחוק סדנה שלא יצרת" });
+    const isOwner = workshop.createdBy.toString() === req.user.userId;
+    const isAdmin = req.user.role === 'admin';
+
+    if (!isOwner && !isAdmin) {
+      return res.status(403).json({ message: "אין לך הרשאה למחוק סדנה זו" });
     }
 
     await workshop.deleteOne();
