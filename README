@@ -6,6 +6,22 @@
 - **🔗 Live Demo:** https://workshop-hub-4j2d.onrender.com
 - **⚙️ Backend API:** https://workshop-hub.onrender.com
 
+:
+
+### 🔑 User Roles & Testing Credentials
+The application features two distinct user roles to demonstrate advanced authorization logic. Since Admin users cannot be created via the standard registration form for security reasons, please use the following credentials to test administrative privileges:
+
+**Admin**:
+User name: Admin
+Password: 123456
+- Full access. Can edit/delete any workshop.
+
+**User**:
+User name: User
+Password: 123456
+Or create your own (in Register Page).
+- Can only edit/delete their own workshops.
+
 ### Project Structure
 Workshop-Hub/
 ├── 📁 client/ (Frontend - React + Vite)
